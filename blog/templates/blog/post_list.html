@@ -1,33 +1,16 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8"/>
-    <title>David's Blog</title>
-  </head>
-  <body>
+{% extends 'blog/base.html' %}
 
-    <div>
-      <h1><a href="">The Blog</a></h1>
+{% block content %}
+
+  {% for post in posts %}
+    <div class="post">
+       <div class="date">
+         published: {{ post.published_date }}
+       </div>
+
+       <h1><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h1>
+       <p>{{ post.text|linebreaksbr }}</p>
     </div>
+  {% endfor %}
 
-    <!-- <div> -->
-    <!--   <p>published: 25 Jul 17</p> -->
-    <!--   <h3><a href="">My First Post</a></h3> -->
-    <!--   <p>Sit amet cursus sit amet? At risus viverra adipiscing at in tellus integer feugiat scelerisque varius morbi enim nunc, faucibus a pellentesque sit amet, porttitor eget dolor morbi non arcu?</p> -->
-    <!-- </div> -->
-
-    <!-- <div> -->
-    <!--   <p>published: 25 Jul 17</p> -->
-    <!--   <h3><a href="">My Second Post</a></h3> -->
-    <!--   <p>Amet justo donec enim diam, vulputate ut pharetra sit amet, aliquam id diam maecenas ultricies mi eget mauris pharetra et.</p> -->
-    <!-- </div> -->
-{% for post in posts %}
-    <div>
-      <h3>published: {{ post.published_date }}</h3>
-      <h1><a href="">{{ post.title }}</a></h1>
-      <p>{{ post.text|linebreaksbr }}</p>
-    </div>
-{% endfor %}
-    
-  </body>
-</html>
+{% endblock%}
